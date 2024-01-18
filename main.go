@@ -1,4 +1,4 @@
-package simple_pubsub_server
+package main
 
 import (
 	"fmt"
