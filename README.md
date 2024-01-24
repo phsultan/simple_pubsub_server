@@ -49,7 +49,7 @@ go run main.go
 To publish a message to a specific topic, make an HTTP POST request to /publish/{topic}:
 
 ```
-curl -X POST -d '{"Content":"Your message content"}' http://localhost:8080/publish/{topic}
+curl -X POST -H "content-type: application/json" -d '{"Content":"Your message content"}' http://localhost:8080/publish/{topic}
 ```
 
 ## Subscribing to Topics
