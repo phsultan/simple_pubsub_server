@@ -2,6 +2,7 @@ package simple_pubsub_server
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strings"
 	"sync"
@@ -34,6 +35,9 @@ func (ps *PubSubServer) PublishHandler(w http.ResponseWriter, r *http.Request) {
 	ps.mu.Lock()
 	defer ps.mu.Unlock()
 
+	fmt.Printf("[PublishHandler] topic : %s, sending to %d subscribers\n", topic, len(ps.Subscribers))
+	fmt.Printf("[PublishHandler] msg : %s\n", msg)
+
 	// Add the message to the buffer
 	ps.messageBuffer = append(ps.messageBuffer, msg)
 
@@ -65,6 +69,9 @@ func (ps *PubSubServer) SubscribeHandler(w http.ResponseWriter, r *http.Request)
 
 	ps.mu.Lock()
 	defer ps.mu.Unlock()
+
+	fmt.Printf("[SubscribeHandler] subscribing to topic : %s\n", topic)
+	fmt.Printf("[SubscribeHandler] len(ps.messageBuffer) : %d\n", len(ps.messageBuffer))
 
 	// Create a new subscriber channel
 	ch := make(chan Message)
