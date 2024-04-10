@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"strings"
 	"sync"
-
-	. "github.com/phsultan/simple_pubsub_server/messages"
 )
 
 type PubSubServer struct {

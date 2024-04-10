@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	."github.com/phsultan/simple_pubsub_server/server" // PubSubServer struct as type
-	."github.com/phsultan/simple_pubsub_server/messages" // Message struct as type
 )
 
 func main() {
