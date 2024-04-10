@@ -1,7 +1,19 @@
 package simple_pubsub_server
 
-// Message represents the data structure that will be sent between publishers and subscribers
 type Message struct {
-	Content string `json:"content"`
+	topic string
+	body  string
 }
 
+func NewMessage(msg string, topic string) *Message {
+	return &Message{
+		topic: topic,
+		body:  msg,
+	}
+}
+func (m *Message) GetTopic() string {
+	return m.topic
+}
+func (m *Message) GetMessageBody() string {
+	return m.body
+}
