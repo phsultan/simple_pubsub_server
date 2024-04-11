@@ -77,7 +77,7 @@ func (s *Subscriber) Listen() {
 	// Listens to the message channel, prints once received.
 	for {
 		if msg, ok := <-s.messages; ok {
-			fmt.Printf("Subscriber %s, received: %s from topic: %s\n", s.id, msg.GetMessageBody(), msg.GetTopic())
+			fmt.Printf("Subscriber %s, received: %s from topic: %s\n", s.id, msg.Body, msg.Topic)
 		}
 	}
 }

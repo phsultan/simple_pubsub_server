@@ -30,11 +30,15 @@ func (ps *PubSubServer) PublishHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	msg.Topic = topic
+
 	ps.mu.Lock()
 	defer ps.mu.Unlock()
 
 	fmt.Printf("[PublishHandler] topic : %s, sending to %d subscribers\n", topic, len(ps.Subscribers))
 	fmt.Printf("[PublishHandler] msg : %s\n", msg)
+	fmt.Printf("[PublishHandler] msg.Topic : %s\n", msg.Topic)
+	fmt.Printf("[PublishHandler] msg.Body : %s\n", msg.Body)
 
 	// Add the message to the buffer
 	ps.messageBuffer = append(ps.messageBuffer, msg)
@@ -100,4 +104,3 @@ func (ps *PubSubServer) SubscribeHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 }
-
