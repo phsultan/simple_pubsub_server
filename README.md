@@ -9,34 +9,16 @@ This Go program implements a simple Publish-Subscribe (PubSub) server that allow
 - Use of HTTP for communication
 - JSON encoding for message payload
 
-## Directory Structure
-
-pubsub/
-|-- main.go
-|-- server/
-| |-- pubsub_server.go
-| |-- handlers/
-| |-- publish_handler.go
-| |-- subscribe_handler.go
-|-- messages/
-| |-- message.go
-
-
 ## Running the Server
 
-1. Clone the repository:
-
-```bash
-git clone https://github.com/yourusername/pubsub-server-go.git
-```
-
-2. Navigate to the project directory:
+1. Clone repository, navigate to the project directory:
 
 ```
-cd pubsub-server-go
+git clone git@github.com:phsultan/simple_pubsub_server.git
+cd simple_pubsub_server
 ```
 
-3. Run the server:
+2. Run the server:
 
 ```
 go run main.go
@@ -46,10 +28,10 @@ go run main.go
 
 ## Publishing Messages
 
-To publish a message to a specific topic, make an HTTP POST request to /publish/{topic}:
+To publish a message to a specific topic, make an HTTP POST request to /publish/some_topic:
 
 ```
-curl -X POST -H "content-type: application/json" -d '{"Content":"Your message content"}' http://localhost:8080/publish/{topic}
+curl -X POST -H "content-type: application/json" -d '{"body":"Your message content"}' http://localhost:8080/publish/some_topic
 ```
 
 ## Subscribing to Topics
@@ -57,5 +39,5 @@ curl -X POST -H "content-type: application/json" -d '{"Content":"Your message co
 To subscribe to a topic and receive messages, make an HTTP GET request to /subscribe/{topic}:
 
 ```
-curl http://localhost:8080/subscribe/{topic}
+curl http://localhost:8080/subscribe/some_topic
 ```
