@@ -1,24 +1,14 @@
 package simple_pubsub_server
 
 type Message struct {
-	topic string
-	body  string
+	Topic string `json:"topic"`
+	Body  string `json:"body"`
 }
 
 func NewMessage(msg string, topic string) *Message {
 	// Returns the message object
 	return &Message{
-		topic: topic,
-		body:  msg,
+		Topic: topic,
+		Body:  msg,
 	}
-}
-
-func (m *Message) GetTopic() string {
-	// returns the topic of the message
-	return m.topic
-}
-
-func (m *Message) GetMessageBody() string {
-	// returns the message body.
-	return m.body
 }
