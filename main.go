@@ -8,9 +8,7 @@ import (
 )
 
 func main() {
-	pubSubServer := &PubSubServer{
-		Subscribers: make(map[chan Message]map[string]struct{}),
-	}
+	pubSubServer := NewPubSubServer()
 
 	http.HandleFunc("/publish/", pubSubServer.PublishHandler)
 	http.HandleFunc("/subscribe/", pubSubServer.SubscribeHandler)
