@@ -60,7 +60,7 @@ func (ps *PubSubServer) SubscribeHandler(w http.ResponseWriter, r *http.Request)
 	subscriber := ps.broker.AddSubscriber()
 	ps.broker.Subscribe(subscriber, topic)
 
-	go subscriber.Listen()
+	subscriber.Listen(w)
 
 	// What do we reply to the HTTP client?
 }

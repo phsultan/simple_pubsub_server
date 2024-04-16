@@ -2,8 +2,10 @@ package simple_pubsub_server
 
 import (
 	"crypto/rand"
+	"encoding/json"
 	"fmt"
 	"log"
+	"net/http"
 	"sync"
 )
 
@@ -73,11 +75,21 @@ func (s *Subscriber) Signal(msg *Message) {
 	}
 }
 
-func (s *Subscriber) Listen() {
+func (s *Subscriber) Listen(w http.ResponseWriter) {
+	rc := http.NewResponseController(w)
+	w.Header().Set("Content-Type", "application/json")
+
 	// Listens to the message channel, prints once received.
 	for {
 		if msg, ok := <-s.messages; ok {
 			fmt.Printf("Subscriber %s, received: %s from topic: %s\n", s.id, msg.Body, msg.Topic)
+
+			json.NewEncoder(w).Encode(msg)
+
+			if err := rc.Flush(); err != nil {
+				// Handle error in some way.
+				log.Println("Oops, no flush")
+			}
 		}
 	}
 }
