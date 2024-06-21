@@ -60,6 +60,14 @@ func (ps *PubSubServer) SubscribeHandler(w http.ResponseWriter, r *http.Request)
 	subscriber := ps.broker.AddSubscriber()
 	ps.broker.Subscribe(subscriber, topic)
 
+	go func() {
+		select {
+		case <-r.Context().Done():
+			fmt.Printf("Subscriber %s left\n", subscriber.id)
+			ps.broker.RemoveSubscriber(subscriber)
+		}
+	}()
+
 	subscriber.Listen(w)
 
 	// What do we reply to the HTTP client?

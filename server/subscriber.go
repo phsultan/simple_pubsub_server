@@ -88,7 +88,7 @@ func (s *Subscriber) Listen(w http.ResponseWriter) {
 
 			if err := rc.Flush(); err != nil {
 				// Handle error in some way.
-				log.Println("Oops, no flush")
+				fmt.Println("Oops, no flush :", err)
 			}
 		}
 	}
